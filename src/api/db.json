@@ -1,0 +1,74 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "name": "Hikmah Yousuph",
+      "email": "hikmayousuph@gmail.com",
+      "position": "Developer",
+      "cadreLevel": "Junior",
+      "isAdmin": true,
+      "earnings": {
+        "basic": 5000,
+        "transport": 1000,
+        "overtime": 300,
+        "housing": 500
+      },
+      "deductions": {
+        "tax": 500,
+        "pension": 200
+      }
+    },
+    {
+      "id": 2,
+      "name": "John Doe",
+      "email": "johndoe@gmail.com",
+      "position": "Manager",
+      "cadreLevel": "Level 2",
+      "isAdmin": false,
+      "earnings": {
+        "basic": 5000,
+        "transport": 1000,
+        "overtime": 370,
+        "housing": 700
+      },
+      "deductions": {
+        "tax": 500,
+        "pension": 200
+      }
+    },
+    {
+      "id": 3,
+      "name": "Jane Smith",
+      "email": "janesmith@gmail.com",
+      "position": "Developer",
+      "cadreLevel": "Level 1",
+      "isAdmin": false,
+      "earnings": {
+        "basic": 4000,
+        "housing": 800
+      },
+      "deductions": {
+        "tax": 300,
+        "pension": 150
+      }
+    },
+    {
+      "id": 1685391960153,
+      "name": "jane doe",
+      "email": "jane@gmail.com",
+      "position": "developer",
+      "cadreLevel": "junior",
+      "isAdmin": false,
+      "earnings": {
+        "basic": "123",
+        "transport": "213",
+        "overtime": 300,
+        "housing": 500
+      },
+      "deductions": {
+        "tax": "2",
+        "pension": "13"
+      }
+    }
+  ]
+}
