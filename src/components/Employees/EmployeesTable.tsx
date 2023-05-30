@@ -58,7 +58,7 @@ const EmployeesTable = () => {
                               className="relative even:bg-white odd:bg-cyan-800 odd:bg-opacity-5 border-b border-gray"
                             >
                               <td className="px-2 py-2">{index + 1}</td>
-                              <td className="px-2 py-2">
+                              <td className="px-2 py-2 capitalize">
                                 {employee.name}
                                 <Link
                                   to={`${employee.id}`}
@@ -70,10 +70,10 @@ const EmployeesTable = () => {
                                 </Link>
                               </td>
                               <td className="px-2 py-2">{employee.email}</td>
-                              <td className="px-2 py-2">
+                              <td className="px-2 py-2 capitalize">
                                 {employee.cadreLevel}
                               </td>
-                              <td className="px-2 py-2">{employee.position}</td>
+                              <td className="px-2 py-2 capitalize">{employee.position}</td>
                             </tr>
                           ))}
                         </>

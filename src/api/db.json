@@ -74,7 +74,7 @@
       "id": 1685426474087,
       "name": "Jake Benedict",
       "email": "jb@gmail.com",
-      "position": "graphic-designer",
+      "position": "graphic designer",
       "cadreLevel": "senior",
       "isAdmin": false,
       "earnings": {
@@ -86,6 +86,24 @@
       "deductions": {
         "tax": 75,
         "pension": 220
+      }
+    },
+    {
+      "id": 1685431814429,
+      "name": "Jake Benedict",
+      "email": "jf@gmail.com",
+      "position": "data analyst",
+      "cadreLevel": "Entry",
+      "isAdmin": false,
+      "earnings": {
+        "basic": 500,
+        "transport": 20,
+        "overtime": 40,
+        "housing": 100
+      },
+      "deductions": {
+        "tax": 9,
+        "pension": 12
       }
     }
   ]
