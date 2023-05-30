@@ -44,8 +44,8 @@ const EmployeesTable = () => {
                         <th className="px-2 py-4"></th>
                         <th className="px-2 py-4">Name</th>
                         <th className="px-2 py-4">Email</th>
-                        <th className="px-2 py-4">Position</th>
                         <th className="px-2 py-4">Cadre Level</th>
+                        <th className="px-2 py-4">Position</th>
                       </tr>
                       <tr className="h-6"></tr>
                     </thead>

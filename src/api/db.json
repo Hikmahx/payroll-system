@@ -1,7 +1,7 @@
 {
   "employees": [
     {
-      "id": 1,
+      "id": 1685428248509,
       "name": "Hikmah Yousuph",
       "email": "hikmayousuph@gmail.com",
       "position": "Developer",
@@ -19,7 +19,7 @@
       }
     },
     {
-      "id": 2,
+      "id": 1685328248504,
       "name": "John Doe",
       "email": "johndoe@gmail.com",
       "position": "Manager",
@@ -37,7 +37,7 @@
       }
     },
     {
-      "id": 3,
+      "id": 1685333248578,
       "name": "Jane Smith",
       "email": "janesmith@gmail.com",
       "position": "Developer",
@@ -60,14 +60,32 @@
       "cadreLevel": "junior",
       "isAdmin": false,
       "earnings": {
-        "basic": "123",
-        "transport": "213",
+        "basic": 123,
+        "transport": 213,
         "overtime": 300,
         "housing": 500
       },
       "deductions": {
-        "tax": "2",
-        "pension": "13"
+        "tax": 2,
+        "pension": 13
+      }
+    },
+    {
+      "id": 1685426474087,
+      "name": "Jake Benedict",
+      "email": "jb@gmail.com",
+      "position": "graphic-designer",
+      "cadreLevel": "senior",
+      "isAdmin": false,
+      "earnings": {
+        "basic": 5400,
+        "transport": 28,
+        "overtime": 0,
+        "housing": 411
+      },
+      "deductions": {
+        "tax": 75,
+        "pension": 220
       }
     }
   ]

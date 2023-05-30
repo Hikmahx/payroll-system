@@ -21,8 +21,9 @@ export const addEmployee = createAsyncThunk(
   "employees/addEmployee",
   async (employee: Employee, { rejectWithValue }) => {
     try {
-      let { data } = await axios.post(JSON_API_LINK, employee);
-      const employees = await data;
+      await axios.post(JSON_API_LINK, employee);
+      let employeesData = await axios.get(JSON_API_LINK);
+      const employees = await employeesData.data;
       return employees;
     } catch (err) {
       const error: AxiosError<KnownError> = err as any;
@@ -41,7 +42,7 @@ export const getEmployees = createAsyncThunk(
     try {
       let { data } = await axios.get(JSON_API_LINK);
       const employees = await data;
-      return [employees];
+      return employees;
     } catch (err) {
       const error: AxiosError<KnownError> = err as any;
       if (!error.response) {
@@ -89,7 +90,7 @@ const EmployeesSlice = createSlice({
     });
     builder.addCase(addEmployee.fulfilled, (state, action) => {
       state.loading = false;
-      state.employees = action.payload[0];
+      state.employees = action.payload;
       state.errMsg = "";
     });
     builder.addCase(addEmployee.rejected, (state, action) => {
@@ -104,7 +105,7 @@ const EmployeesSlice = createSlice({
     });
     builder.addCase(getEmployees.fulfilled, (state, action) => {
       state.loading = false;
-      state.employees = action.payload[0];
+      state.employees = action.payload;
       state.errMsg = "";
     });
     builder.addCase(getEmployees.rejected, (state, action) => {
