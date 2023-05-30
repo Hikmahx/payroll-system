@@ -1,46 +1,73 @@
-# Getting Started with Create React App
+# Payroll System - A payment display application 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the documentation for the Payroll System, an application that displays payment information for employees.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Overview](#overview)
+  - [Introduction](#introduction)
+  - [Links](#links)
+  - [Features](#features)
+- [Installation](#installation)
+- [Endpoints](#endpoints)
+- [My Process](#my-process)
+  - [Built With](#built-with)
+- [Author](#author)
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Overview
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Introduction
 
-### `npm test`
+This project is a front-end application that uses JSON Server as a fake backend server for CRUD operations on employees. After a successfully created employee is in the database, the user, only if given administrative permission, can choose to print out the payslip information of the employee in a PDF file.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Links
+GitHub: [https://github.com/Hikmahx/payroll-system](https://github.com/Hikmahx/payroll-system)
+Live Site URL: [https://payroll-system-hikmahx.vercel.app/](https://payroll-system-hikmahx.vercel.app/)
 
-### `npm run build`
+### Features
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Users, if admin, should be able to:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Create, Read, Update, and Delete employees.
+- View a list of all employee.
+- View a single employee details.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+If not admin, should be able to:
+- View their specific details
 
-### `npm run eject`
+## Installation
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+1. Clone the repository.
+2. Install the required packages using `npm install`.
+4. Start the server: `npm start`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Endpoints
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+| Endpoint | Method | Response |
+| --- | --- | --- |
+| `/employees` | GET | List of all employees |
+| `/employees` | POST | Create a new employee |
+| `/employees/:id` | GET | Details of a single employee |
+| `/employees/:id` | PUT | Update an existing employee |
+| `/employees/:id` | DELETE | Delete a single employee |
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## My Process
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Built With
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- React
+- TypeScript
+- Tailwind
+- Redux Toolkit
+- Axios
+- Font Awesome
+- Concurrently
+- React packages: react-router-dom, react-hook-form, react-redux, react-to-print
+
+## Author
+
+- Github - [Hikmah Yousuph](https://github.com/Hikmahx)
+- Email - [hikmayousuph@gmail.com](hikmayousuph@gmail.com)
+- LinkedIn - [Hikmah Yousuph](linkedin.com/in/hikmah-yousuph-449467204/)
