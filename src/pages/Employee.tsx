@@ -1,5 +1,5 @@
 import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Deduction from "../components/Employee/Deductions";
 import Earnings from "../components/Employee/Earnings";
@@ -13,6 +13,7 @@ import { RootState } from "../redux/store";
 import { useNavigate, useParams } from "react-router-dom";
 import { formattedNumber, overallTotal } from "../utils/total";
 import EmployeeForm from "../components/Home/EmployeeForm";
+import { useReactToPrint } from "react-to-print";
 
 const Employee = () => {
   const dispatch: ThunkDispatch<RootState, null, AnyAction> = useDispatch();
@@ -27,8 +28,7 @@ const Employee = () => {
 
   const { id } = useParams<keyof ParamsType>() as ParamsType;
   const navigate = useNavigate();
-
-  // const { pickedDate, submitted } = useSelector((state) => state.calendar);
+  let componentRef = useRef(null);
 
   useEffect(() => {
     dispatch(getSingleEmployee(id));
@@ -46,6 +46,14 @@ const Employee = () => {
     }
   };
 
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+    documentTitle: `${
+      employee.length > 0 && employee[0].name.replace(/\s/g, "-")
+    }-Payslip`,
+    onPrintError: () => alert("there is an error when printing"),
+  });
+
   return (
     <>
       {!error ? (
@@ -56,7 +64,7 @@ const Employee = () => {
             </>
           ) : (
             <>
-              <section className="min-h-[85vh] p-4 lg:p-8">
+              <section className="min-h-[85vh] p-4 lg:p-8" ref={componentRef}>
                 {employee.length > 0 && (
                   <>
                     {employee.map((employee) => (
@@ -65,21 +73,25 @@ const Employee = () => {
                           // DISPLAY THE USER DETAILS IF CURRENTLY NOT BEING UPDATED
                           <div
                             key={employee.id}
-                            className="bg-white rounded-md p-3 lg:p-8 relative"
+                            className="bg-white rounded-md p-3 lg:p-8 relative print:mt-12"
                           >
-                            <h1 className="font-bold mb-8 mt-12 lg:mt-0">
+                            <h1 className="font-bold mb-8 mt-12 lg:mt-0 print:text-3xl">
                               Employee Details
                             </h1>
 
                             <button
                               onClick={() => dispatch(updateEmployeeData(true))}
+                              className="print:hidden"
                             >
                               <span className="sr-only">
                                 Update Employee Details
                               </span>
                               <i className="fa-sharp fa-solid fa-pen absolute top-8 right-16 text-zinc-500"></i>
                             </button>
-                            <button onClick={handleDelete}>
+                            <button
+                              onClick={handleDelete}
+                              className="print:hidden"
+                            >
                               <span className="sr-only">Delete Employe</span>
                               <i className="fa-solid fa-trash absolute top-8 right-8 text-zinc-500"></i>
                             </button>
@@ -122,6 +134,14 @@ const Employee = () => {
                                   ₦ {formattedNumber(overallTotal(employee))}
                                 </span>
                               </h2>
+                            </div>
+                            <div className="print:hidden">
+                              <button
+                                onClick={handlePrint}
+                                className="bg-cyan-500 px-6 py-2 text-white border border-cyan-500 font-bold rounded-md mb-3 w-full lg:w-fit my-6 max-w-sm"
+                              >
+                                Print Payslip
+                              </button>
                             </div>
                           </div>
                         ) : (

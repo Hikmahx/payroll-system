@@ -13,7 +13,7 @@ const Header = () => {
   };
 
   return (
-    <header className="relative w-full bg-white shadow-lg">
+    <header className="relative w-full bg-white shadow-lg print:hidden">
       <div className="flex items-center justify-between">
         <div
           onClick={() => dispatch(setMenuDisplay(false))}
