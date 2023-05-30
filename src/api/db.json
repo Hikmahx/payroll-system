@@ -22,8 +22,8 @@
       "id": 1685328248504,
       "name": "John Doe",
       "email": "johndoe@gmail.com",
-      "position": "Manager",
-      "cadreLevel": "Level 2",
+      "position": "accountant",
+      "cadreLevel": "Consultant",
       "isAdmin": false,
       "earnings": {
         "basic": 5000,
@@ -45,9 +45,9 @@
       "isAdmin": false,
       "earnings": {
         "basic": 4000,
-        "transport": 411,
         "housing": 800,
-        "overtime": 0
+        "overtime": 0,
+        "transport": 411
       },
       "deductions": {
         "tax": 300,
@@ -92,7 +92,7 @@
     },
     {
       "id": 1685431814429,
-      "name": "Jake Benedict",
+      "name": "Joe Forest",
       "email": "jf@gmail.com",
       "position": "data analyst",
       "cadreLevel": "Entry",
@@ -106,6 +106,24 @@
       "deductions": {
         "tax": 9,
         "pension": 12
+      }
+    },
+    {
+      "id": 1685452220055,
+      "name": "Jim Who",
+      "email": "jw@gmail.com",
+      "position": "data analyst",
+      "cadreLevel": "Associate",
+      "isAdmin": false,
+      "earnings": {
+        "basic": 1,
+        "transport": 100,
+        "overtime": 22,
+        "housing": 1
+      },
+      "deductions": {
+        "tax": 13,
+        "pension": 10
       }
     }
   ]

@@ -9,6 +9,7 @@ interface EmployeesState {
   loading: boolean;
   errMsg: string | undefined;
   // deduction: number;
+  update: boolean;
 }
 
 interface KnownError {
@@ -72,12 +73,31 @@ export const getSingleEmployee = createAsyncThunk(
   }
 );
 
+// UPDATE EMPLOYEE FROM SRC/API/DB.JSON
+export const updateEmployee = createAsyncThunk(
+  "employees/updateEmployee",
+  async ({ id, dataInfo }: any, { rejectWithValue }) => {
+    try {
+      let { data } = await axios.put(`${JSON_API_LINK}/${id}`, dataInfo);
+      const employee = await data;
+      return [employee];
+    } catch (err) {
+      const error: AxiosError<KnownError> = err as any;
+      if (!error.response) {
+        throw err;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const initialState: EmployeesState = {
   employees: [],
   employee: [],
   error: false,
   loading: false,
   errMsg: "" as string | undefined,
+  update: false,
   // deduction:0
 };
 
@@ -87,6 +107,9 @@ const EmployeesSlice = createSlice({
   reducers: {
     // deductionTotal: (state, action) => {
     // },
+    updateEmployeeData: (state, { payload }) => {
+      state.update = payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(addEmployee.pending, (state, action) => {
@@ -132,7 +155,22 @@ const EmployeesSlice = createSlice({
       state.error = true;
       state.errMsg = action.error.message;
     });
+    builder.addCase(updateEmployee.pending, (state, action) => {
+      state.loading = true;
+      state.error = false;
+    });
+    builder.addCase(updateEmployee.fulfilled, (state, action) => {
+      state.loading = false;
+      state.employee = action.payload;
+      state.errMsg = "";
+    });
+    builder.addCase(updateEmployee.rejected, (state, action) => {
+      state.loading = false;
+      state.error = true;
+      state.errMsg = action.error.message;
+    });
   },
 });
+export const { updateEmployeeData } = EmployeesSlice.actions;
 
 export default EmployeesSlice.reducer;

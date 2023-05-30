@@ -2,15 +2,20 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AppDispatch, RootState } from "../../redux/store";
-import { addEmployee } from "../../redux/reducers/employeesSlice";
-import { useNavigate } from "react-router-dom";
+import {
+  addEmployee,
+  updateEmployee,
+  updateEmployeeData,
+} from "../../redux/reducers/employeesSlice";
+import { useNavigate, useParams } from "react-router-dom";
 import Success from "./Success";
 
-const EmployeeForm = () => {
+const EmployeeForm = ({ employee }: any) => {
   const dispatch = useDispatch<AppDispatch>();
   const { register, handleSubmit, reset } = useForm<FormValues>({
     mode: "onChange",
   });
+  let params = useParams();
 
   type FormValues = {
     // id: number,
@@ -26,7 +31,9 @@ const EmployeeForm = () => {
     pension: number;
   };
 
-  const { employees } = useSelector((state: RootState) => state.employees);
+  const { employees, update } = useSelector(
+    (state: RootState) => state.employees
+  );
   const isFirstRender = useRef(true);
   const [newEmployee, setNewEmployee] = useState(false);
 
@@ -50,37 +57,53 @@ const EmployeeForm = () => {
   }, [employees]);
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log(data);
-    dispatch(
-      addEmployee({
-        id: Date.now(),
-        name: data.name,
-        email: data.email,
-        position: data.position,
-        cadreLevel: data.cadreLevel,
-        isAdmin: false,
-        earnings: {
-          basic: data.basic,
-          transport: data.transport,
-          overtime: data.overtime,
-          housing: data.housing,
-        },
-        deductions: {
-          tax: data.tax,
-          pension: data.pension,
-        },
-      })
-    );
+    // ID ISN'T UPDATABLE, IT WILL TAKE ITS INITIAL ID IF BEING UPDATED OR CREATE A NEW ID IF A NEW EMPLOYEE IS BEING CREATED
+    const dataInfo = {
+      id: !update ? Date.now() : employee.id,
+      name: data.name,
+      email: data.email,
+      position: data.position,
+      cadreLevel: data.cadreLevel,
+      isAdmin: false,
+      earnings: {
+        basic: data.basic,
+        transport: data.transport,
+        overtime: data.overtime,
+        housing: data.housing,
+      },
+      deductions: {
+        tax: data.tax,
+        pension: data.pension,
+      },
+    };
+    if (!update) {
+      dispatch(addEmployee(dataInfo));
+    } else {
+      dispatch(
+        updateEmployee({
+          dataInfo,
+          id: params.id,
+        })
+      );
+      dispatch(updateEmployeeData(false));
+      alert("Employee data updated successfully")
+    }
     reset();
   };
 
   return (
     <>
       {!newEmployee ? (
-        <section className="employee mx-4 mb-12">
-          <h2 className="bg-very-light-gray font-bold p-4 py-12 w-fit">
-            Add Employee
+        <section className="employee mx-4 mb-12 relative">
+          <h2 className="bg-very-light-gray font-bold p-4 my-12 w-fit">
+            {update ? "Update" : "Add"} Employee
           </h2>
+          {update && (
+            <button onClick={() => dispatch(updateEmployeeData(false))}>
+              <span className="sr-only">Cancel Update</span>
+              <i className="fa-sharp fa-solid fa-circle-xmark absolute top-4 right-4 hover:text-red-500"></i>
+            </button>
+          )}
           <form
             className="bg-white flex flex-col border border-gray rounded-md flex-1 h-fit w-full"
             onSubmit={handleSubmit(onSubmit)}
@@ -103,6 +126,7 @@ const EmployeeForm = () => {
                       className="h-10 p-3 w-full border border-gray placeholder-gray focus:outline-none focus:border-cyan-500 rounded-md"
                       placeholder="Full Name"
                       {...register("name")}
+                      defaultValue={update ? employee?.name : ""}
                       required
                     />
                   </div>
@@ -118,6 +142,7 @@ const EmployeeForm = () => {
                       className="h-10 p-3 w-full border border-gray placeholder-gray focus:outline-none focus:border-cyan-500 rounded-md"
                       placeholder="Email"
                       {...register("email")}
+                      defaultValue={update ? employee?.email : ""}
                       required
                     />
                   </div>
@@ -134,6 +159,7 @@ const EmployeeForm = () => {
                     className="form-select form-select-lg !shadow-none bg-clip-padding bg-no-repeat appearance-none px-3 py-2 w-full h-10 border border-gray rounded-md transition ease-in-out text-dark-gray bg-white cursor-pointer focus:text-dark-gray focus:border-cyan-500 focus:outline-none"
                     aria-label="position"
                     {...register("position")}
+                    defaultValue={update ? employee?.position : ""}
                     required
                     // onChange={(e) => dispatch(setposition(e.target.value))}
                   >
@@ -161,6 +187,7 @@ const EmployeeForm = () => {
                     className="form-select form-select-lg !shadow-none bg-clip-padding bg-no-repeat appearance-none px-3 py-2 w-full h-10 border border-gray rounded-md transition ease-in-out text-dark-gray bg-white cursor-pointer focus:text-dark-gray focus:border-cyan-500 focus:outline-none"
                     aria-label="cadreLevel"
                     {...register("cadreLevel")}
+                    defaultValue={update ? employee?.cadreLevel : ""}
                     required
 
                     // onChange={(e) => dispatch(setposition(e.target.value))}
@@ -199,6 +226,7 @@ const EmployeeForm = () => {
                       {...register("basic", {
                         valueAsNumber: true,
                       })}
+                      defaultValue={update ? employee?.earnings.basic : ""}
                       required
                     />
                   </div>
@@ -215,6 +243,7 @@ const EmployeeForm = () => {
                       {...register("transport", {
                         valueAsNumber: true,
                       })}
+                      defaultValue={update ? employee?.earnings.transport : ""}
                       required
                     />
                   </div>
@@ -231,6 +260,7 @@ const EmployeeForm = () => {
                       {...register("overtime", {
                         valueAsNumber: true,
                       })}
+                      defaultValue={update ? employee?.earnings.overtime : ""}
                       required
                     />
                   </div>
@@ -247,6 +277,7 @@ const EmployeeForm = () => {
                       {...register("housing", {
                         valueAsNumber: true,
                       })}
+                      defaultValue={update ? employee?.earnings.housing : ""}
                       required
                     />
                   </div>
@@ -272,6 +303,7 @@ const EmployeeForm = () => {
                       {...register("pension", {
                         valueAsNumber: true,
                       })}
+                      defaultValue={update ? employee?.deductions.pension : ""}
                       required
                     />
                   </div>
@@ -288,6 +320,7 @@ const EmployeeForm = () => {
                       {...register("tax", {
                         valueAsNumber: true,
                       })}
+                      defaultValue={update ? employee?.deductions.tax : ""}
                       required
                     />
                   </div>
