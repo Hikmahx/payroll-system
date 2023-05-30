@@ -16,7 +16,12 @@ interface KnownError {
   errMessage: string;
 }
 
-const JSON_API_LINK = "http://localhost:3004/employees";
+// FOR LOCAL SYSTEM US. UNCOMMENT THE LINE BELOW IF YOU'RE RUNNING THIS ON YOUR LOCAL SYSTEM
+// const JSON_API_LINK = "http://localhost:3004/employees";
+
+// FOR DEPLOYED WEBSITE (Changes aren't persisted between calls). COMMENT THE LINE BELOW IF YOU'RE RUNNING THIS ON YOUR LOCAL SYSTEM
+const JSON_API_LINK ="https://my-json-server.typicode.com/Hikmahx/payroll-db/employees"
+
 
 // CREATE A NEW EMPLOYEE INTO THE JSON SERVER
 export const addEmployee = createAsyncThunk(
