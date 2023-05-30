@@ -7,6 +7,7 @@ import Loading from "../shared/Loading";
 import { getEmployees } from "../../redux/reducers/employeesSlice";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
+import { deductionTotal, earningTotal, formattedNumber } from "../../utils/total";
 
 const EmployeesTable = () => {
   const dispatch: ThunkDispatch<RootState, null, AnyAction> = useDispatch();
@@ -44,8 +45,8 @@ const EmployeesTable = () => {
                         <th className="px-2 py-4"></th>
                         <th className="px-2 py-4">Name</th>
                         <th className="px-2 py-4">Email</th>
-                        <th className="px-2 py-4">Cadre Level</th>
-                        <th className="px-2 py-4">Position</th>
+                        <th className="px-2 py-4">Earnings</th>
+                        <th className="px-2 py-4">Deductions</th>
                       </tr>
                       <tr className="h-6"></tr>
                     </thead>
@@ -70,10 +71,18 @@ const EmployeesTable = () => {
                                 </Link>
                               </td>
                               <td className="px-2 py-2">{employee.email}</td>
-                              <td className="px-2 py-2 capitalize">
-                                {employee.cadreLevel}
+                              <td className="px-2 py-2 capitalize ">
+                                ₦{" "}
+                                <span className="text-green-600">
+                                  {formattedNumber(earningTotal(employee))}
+                                </span>
                               </td>
-                              <td className="px-2 py-2 capitalize">{employee.position}</td>
+                              <td className="px-2 py-2 capitalize ">
+                                ₦{" "}
+                                <span className="text-red-600">
+                                  {formattedNumber(deductionTotal(employee))}
+                                </span>
+                              </td>
                             </tr>
                           ))}
                         </>

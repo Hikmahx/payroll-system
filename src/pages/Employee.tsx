@@ -7,6 +7,7 @@ import Loading from "../components/shared/Loading";
 import { getSingleEmployee } from "../redux/reducers/employeesSlice";
 import { RootState } from "../redux/store";
 import { useParams } from "react-router-dom";
+import { formattedNumber, overallTotal } from "../utils/total";
 
 const Employee = () => {
   const dispatch: ThunkDispatch<RootState, null, AnyAction> = useDispatch();
@@ -46,11 +47,45 @@ const Employee = () => {
                         key={employee.id}
                         className="bg-white rounded-md p-8"
                       >
-                        <h1 className="font-bold">Employee</h1>
+                        <h1 className="font-bold mb-8">Employee Details</h1>
 
-                        <div className="flex">
+                        <div className="info p-4 border border-zinc-200 rounded-md">
+                          <p className="mb-4">
+                            <span className="font-bold">Name:</span>{" "}
+                            <span className="text-zinc-500 text-sm capitalize">
+                              {employee.name}
+                            </span>
+                          </p>
+                          <p className="mb-4">
+                            <span className="font-bold">Email:</span>{" "}
+                            <span className="text-zinc-500 text-sm break-words">
+                              {employee.email}
+                            </span>
+                          </p>
+                          <p className="mb-4">
+                            <span className="font-bold">Cadre Level:</span>{" "}
+                            <span className="text-zinc-500 text-sm capitalize">
+                              {employee.cadreLevel}
+                            </span>
+                          </p>
+                          <p className="mb-4">
+                            <span className="font-bold">Position:</span>{" "}
+                            <span className="text-zinc-500 text-sm capitalize">
+                              {employee.position}
+                            </span>
+                          </p>
+                        </div>
+                        <div className="flex flex-col lg:flex-row gap-5 my-6">
                           <Earnings employee={employee} />
                           <Deduction employee={employee} />
+                        </div>
+                        <div className="info p-4 border border-zinc-200 rounded-md">
+                          <h2 className="text-lg">
+                            <span className="font-bold">Overall Total:</span>{" "}
+                            <span className="">
+                              ₦ {formattedNumber(overallTotal(employee))}
+                            </span>
+                          </h2>
                         </div>
                       </div>
                     ))}

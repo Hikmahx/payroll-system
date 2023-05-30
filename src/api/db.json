@@ -45,7 +45,9 @@
       "isAdmin": false,
       "earnings": {
         "basic": 4000,
-        "housing": 800
+        "transport": 411,
+        "housing": 800,
+        "overtime": 0
       },
       "deductions": {
         "tax": 300,

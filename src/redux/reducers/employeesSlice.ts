@@ -8,6 +8,7 @@ interface EmployeesState {
   error: boolean;
   loading: boolean;
   errMsg: string | undefined;
+  // deduction: number;
 }
 
 interface KnownError {
@@ -77,12 +78,16 @@ const initialState: EmployeesState = {
   error: false,
   loading: false,
   errMsg: "" as string | undefined,
+  // deduction:0
 };
 
 const EmployeesSlice = createSlice({
   name: "employees",
   initialState,
-  reducers: {},
+  reducers: {
+    // deductionTotal: (state, action) => {
+    // },
+  },
   extraReducers: (builder) => {
     builder.addCase(addEmployee.pending, (state, action) => {
       state.loading = true;
