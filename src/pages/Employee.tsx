@@ -5,11 +5,12 @@ import Deduction from "../components/Employee/Deductions";
 import Earnings from "../components/Employee/Earnings";
 import Loading from "../components/shared/Loading";
 import {
+  deleteEmployee,
   getSingleEmployee,
   updateEmployeeData,
 } from "../redux/reducers/employeesSlice";
 import { RootState } from "../redux/store";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { formattedNumber, overallTotal } from "../utils/total";
 import EmployeeForm from "../components/Home/EmployeeForm";
 
@@ -25,6 +26,7 @@ const Employee = () => {
   };
 
   const { id } = useParams<keyof ParamsType>() as ParamsType;
+  const navigate = useNavigate();
 
   // const { pickedDate, submitted } = useSelector((state) => state.calendar);
 
@@ -32,6 +34,17 @@ const Employee = () => {
     dispatch(getSingleEmployee(id));
     // eslint-disable-next-line
   }, []);
+
+  const handleDelete = () => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this item?"
+    );
+    if (confirmed) {
+      dispatch(deleteEmployee(id));
+      navigate("/employees");
+      alert("Delete successful");
+    }
+  };
 
   return (
     <>
@@ -43,7 +56,7 @@ const Employee = () => {
             </>
           ) : (
             <>
-              <section className="min-h-[85vh] p-8">
+              <section className="min-h-[85vh] p-4 lg:p-8">
                 {employee.length > 0 && (
                   <>
                     {employee.map((employee) => (
@@ -52,9 +65,11 @@ const Employee = () => {
                           // DISPLAY THE USER DETAILS IF CURRENTLY NOT BEING UPDATED
                           <div
                             key={employee.id}
-                            className="bg-white rounded-md p-8 relative"
+                            className="bg-white rounded-md p-3 lg:p-8 relative"
                           >
-                            <h1 className="font-bold mb-8">Employee Details</h1>
+                            <h1 className="font-bold mb-8 mt-12 lg:mt-0">
+                              Employee Details
+                            </h1>
 
                             <button
                               onClick={() => dispatch(updateEmployeeData(true))}
@@ -62,9 +77,12 @@ const Employee = () => {
                               <span className="sr-only">
                                 Update Employee Details
                               </span>
-                              <i className="fa-sharp fa-solid fa-pen absolute top-8 right-8 text-zinc-500"></i>
+                              <i className="fa-sharp fa-solid fa-pen absolute top-8 right-16 text-zinc-500"></i>
                             </button>
-
+                            <button onClick={handleDelete}>
+                              <span className="sr-only">Delete Employe</span>
+                              <i className="fa-solid fa-trash absolute top-8 right-8 text-zinc-500"></i>
+                            </button>
                             <div className="info p-4 border border-zinc-200 rounded-md">
                               <p className="mb-4">
                                 <span className="font-bold">Name:</span>{" "}

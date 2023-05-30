@@ -91,6 +91,24 @@ export const updateEmployee = createAsyncThunk(
   }
 );
 
+// DELETE EMPLOYEE FROM SRC/API/DB.JSON
+export const deleteEmployee = createAsyncThunk(
+  "employees/deleteEmployee",
+  async (id: string | undefined, { rejectWithValue }) => {
+    try {
+      let { data } = await axios.delete(`${JSON_API_LINK}/${id}`);
+      const employee = await data;
+      return [employee];
+    } catch (err) {
+      const error: AxiosError<KnownError> = err as any;
+      if (!error.response) {
+        throw err;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const initialState: EmployeesState = {
   employees: [],
   employee: [],
@@ -165,6 +183,20 @@ const EmployeesSlice = createSlice({
       state.errMsg = "";
     });
     builder.addCase(updateEmployee.rejected, (state, action) => {
+      state.loading = false;
+      state.error = true;
+      state.errMsg = action.error.message;
+    });
+    builder.addCase(deleteEmployee.pending, (state, action) => {
+      state.loading = true;
+      state.error = false;
+    });
+    builder.addCase(deleteEmployee.fulfilled, (state, action) => {
+      state.loading = false;
+      state.employee = [];
+      state.errMsg = "";
+    });
+    builder.addCase(deleteEmployee.rejected, (state, action) => {
       state.loading = false;
       state.error = true;
       state.errMsg = action.error.message;
