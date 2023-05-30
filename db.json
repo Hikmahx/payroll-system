@@ -1,0 +1,148 @@
+{
+  "employees": [
+    {
+      "id": 1685428248509,
+      "name": "Hikmah Yousuph",
+      "email": "hikmayousuph@gmail.com",
+      "position": "Developer",
+      "cadreLevel": "Junior",
+      "isAdmin": true,
+      "earnings": {
+        "basic": 5000,
+        "transport": 1000,
+        "overtime": 300,
+        "housing": 500
+      },
+      "deductions": {
+        "tax": 500,
+        "pension": 200
+      }
+    },
+    {
+      "id": 1685328248504,
+      "name": "John Doe",
+      "email": "johndoe@gmail.com",
+      "position": "accountant",
+      "cadreLevel": "Consultant",
+      "isAdmin": false,
+      "earnings": {
+        "basic": 5000,
+        "transport": 1000,
+        "overtime": 370,
+        "housing": 700
+      },
+      "deductions": {
+        "tax": 500,
+        "pension": 200
+      }
+    },
+    {
+      "id": 1685333248578,
+      "name": "Jane Smith",
+      "email": "janesmith@gmail.com",
+      "position": "Developer",
+      "cadreLevel": "Level 1",
+      "isAdmin": false,
+      "earnings": {
+        "basic": 4000,
+        "housing": 800,
+        "overtime": 0,
+        "transport": 411
+      },
+      "deductions": {
+        "tax": 300,
+        "pension": 150
+      }
+    },
+    {
+      "id": 1685391960153,
+      "name": "jane doe",
+      "email": "jane@gmail.com",
+      "position": "developer",
+      "cadreLevel": "junior",
+      "isAdmin": false,
+      "earnings": {
+        "basic": 123,
+        "transport": 213,
+        "overtime": 300,
+        "housing": 500
+      },
+      "deductions": {
+        "tax": 2,
+        "pension": 13
+      }
+    },
+    {
+      "id": 1685426474087,
+      "name": "Jake Benedict",
+      "email": "jb@gmail.com",
+      "position": "graphic designer",
+      "cadreLevel": "senior",
+      "isAdmin": false,
+      "earnings": {
+        "basic": 5400,
+        "transport": 28,
+        "overtime": 0,
+        "housing": 411
+      },
+      "deductions": {
+        "tax": 75,
+        "pension": 220
+      }
+    },
+    {
+      "id": 1685431814429,
+      "name": "Joe Forest",
+      "email": "jf@gmail.com",
+      "position": "data analyst",
+      "cadreLevel": "Entry",
+      "isAdmin": false,
+      "earnings": {
+        "basic": 500,
+        "transport": 20,
+        "overtime": 40,
+        "housing": 100
+      },
+      "deductions": {
+        "tax": 9,
+        "pension": 12
+      }
+    },
+    {
+      "id": 1685452220055,
+      "name": "Jim Who",
+      "email": "jw@gmail.com",
+      "position": "manager",
+      "cadreLevel": "Associate",
+      "isAdmin": false,
+      "earnings": {
+        "basic": 1,
+        "transport": 100,
+        "overtime": 22,
+        "housing": 13
+      },
+      "deductions": {
+        "tax": 13,
+        "pension": 10
+      }
+    },
+    {
+      "id": 1685455308186,
+      "name": "Went Go",
+      "email": "wego@gmail.com",
+      "position": "project manager",
+      "cadreLevel": "Director",
+      "isAdmin": false,
+      "earnings": {
+        "basic": 12080,
+        "transport": 120,
+        "overtime": 33,
+        "housing": 550
+      },
+      "deductions": {
+        "tax": 162,
+        "pension": 200
+      }
+    }
+  ]
+}
