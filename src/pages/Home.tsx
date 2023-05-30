@@ -1,30 +1,62 @@
 // import React, { useEffect } from "react";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import EmployeeForm from "../components/Home/EmployeeForm";
+import Success from "../components/Home/Success";
 import { updateEmployeeData } from "../redux/reducers/employeesSlice";
-import { AppDispatch } from "../redux/store";
+import { AppDispatch, RootState } from "../redux/store";
 // import { useDispatch } from "react-redux";
 // import { AppDispatch } from "../redux/store";
 
-
-
-
 const DashBoard = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const { employees } = useSelector(
+    (state: RootState) => state.employees
+  );
+  const navigate = useNavigate();
+  const isFirstRender = useRef(true);
+  const [newEmployee, setNewEmployee] = useState(false);
 
   useEffect(() => {
-    dispatch(updateEmployeeData(false))
+    dispatch(updateEmployeeData(false));
     // eslint-disable-next-line
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+    } else {
+      // This effect will be triggered only when the employees  increases
+      setNewEmployee(true);
+
+      const timeout = setTimeout(() => {
+        setNewEmployee(false);
+        // WILL REDIRECT AFTER TO EMPLOYEES PAGE
+        navigate("employees");
+      }, 3000);
+
+      return () => clearTimeout(timeout);
+    }
+    // eslint-disable-next-line
+  }, [employees]);
+
   document.title = "Payroll System";
 
   // const dispatch = useDispatch<AppDispatch>();
 
   return (
-    <div>
-      <EmployeeForm />
-    </div>
+    <>
+      {!newEmployee ? (
+        <>
+          <EmployeeForm />
+        </>
+      ) : (
+        <>
+          <Success />
+        </>
+      )}
+    </>
   );
 };
 

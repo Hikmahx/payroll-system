@@ -125,6 +125,24 @@
         "tax": 13,
         "pension": 10
       }
+    },
+    {
+      "id": 1685455308186,
+      "name": "Went Go",
+      "email": "wego@gmail.com",
+      "position": "project manager",
+      "cadreLevel": "Director",
+      "isAdmin": false,
+      "earnings": {
+        "basic": 12080,
+        "transport": 120,
+        "overtime": 33,
+        "housing": 550
+      },
+      "deductions": {
+        "tax": 162,
+        "pension": 200
+      }
     }
   ]
 }
