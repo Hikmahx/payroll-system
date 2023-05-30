@@ -6,6 +6,9 @@ This is the documentation for the Payroll System, an application that displays p
 
 - [Overview](#overview)
   - [Introduction](#introduction)
+  - [Screenshot](#screenshot)
+    - [Mobile](#mobile)
+    - [Desktop](#desktop)
   - [Links](#links)
   - [Features](#features)
 - [Installation](#installation)
@@ -20,6 +23,29 @@ This is the documentation for the Payroll System, an application that displays p
 ### Introduction
 
 This project is a front-end application that uses JSON Server as a fake backend server for CRUD operations on employees. After a successfully created employee is in the database, the user, only if given administrative permission, can choose to print out the payslip information of the employee in a PDF file.
+
+### Screenshot
+![](./screenshot.jpg)
+
+#### Mobile
+<div style="display:flex; flex-wrap:wrap">
+  <img src="./designs/payroll-system-rust.vercel.app_employees_(1).png" width='120px' style="margin:6px"> 
+  <img src="./designs/payroll-system-rust.vercel.app_employees_(2).png" width='120px' style="margin:6px"> 
+  <img src="./designs/payroll-system-rust.vercel.app_employees_(5).png" width='120px' style="margin:6px"> 
+  <img src="./designs/payroll-system-rust.vercel.app_employees_(6).png" width='120px' style="margin:6px"> 
+<div>
+
+
+#### Desktop
+<div style="display:flex; flex-wrap:wrap">
+  <img src="./designs/payroll-system-rust.vercel.app_employees.png" width='180px' style="margin:6px"> 
+  <img src="./designs/payroll-system-rust.vercel.app_employees_(3).png" width='180px' style="margin:6px"> 
+  <img src="./designs/payroll-system-rust.vercel.app_employees_(4).png" width='180px' style="margin:6px"> 
+  <img src="./designs/payroll-system-rust.vercel.app_employees_(7).png" width='180px' style="margin:6px"> 
+  <img src="./designs/payroll-system-rust.vercel.app_employees_(8).png" width='320px' style="margin:6px"> 
+
+<div>
+
 
 ### Links
 GitHub: [https://github.com/Hikmahx/payroll-system](https://github.com/Hikmahx/payroll-system)
