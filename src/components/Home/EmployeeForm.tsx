@@ -74,7 +74,7 @@ const EmployeeForm = ({ employee }: any) => {
       {update && (
         <button onClick={() => dispatch(updateEmployeeData(false))}>
           <span className="sr-only">Cancel Update</span>
-          <i className="fa-sharp fa-solid fa-circle-xmark absolute top-4 right-4 hover:text-red-500"></i>
+          <i className="fa-sharp fa-solid fa-circle-xmark absolute top-4 right-0 hover:text-red-500"></i>
         </button>
       )}
       <form

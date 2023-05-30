@@ -140,7 +140,7 @@ const Employee = () => {
         </>
       ) : (
         <>
-          <p className=" mt-20 text-center text-very-dark-blue min-h-[30vh]">
+          <p className=" mt-20 text-center text-very-dark-blue min-h-[85vh]">
             {errMsg}.
           </p>
         </>

@@ -29,7 +29,7 @@ const Header = () => {
             onClick={menuToggle}
             className="z-30 top-4 right-6 group lg:hidden py-4 px-6"
           >
-            <div className="relative flex items-center justify-center rounded-full w-6 h-6 transform transition-all duration-200">
+            <div className="fixed top-9 left-6 flex items-center justify-center rounded-full w-6 h-6 transform transition-all duration-200">
               <div
                 className={
                   "flex flex-col justify-between w-[20px] h-[20px] transform transition-all duration-300 origin-center " +
@@ -40,7 +40,7 @@ const Header = () => {
                   className={
                     "h-[2px] w-[20px] rounded transform transition-all duration-300 origin-right delay-75 " +
                     (menuDisplay
-                      ? "-translate-y-[1px] h-[1px] w-1/2 -rotate-90 bg-white"
+                      ? "-translate-y-[1px] h-[1px] !w-1/2 -rotate-90 bg-white"
                       : "bg-white")
                   }
                 ></div>
@@ -53,7 +53,7 @@ const Header = () => {
                   className={
                     "h-[2px] w-[20px] rounded self-end transform transition-all duration-300 origin-left delay-75 " +
                     (menuDisplay
-                      ? "translate-y-[1px] h-[1px] w-1/2 -rotate-90 bg-white"
+                      ? "translate-y-[1px] h-[1px] !w-1/2 -rotate-90 bg-white"
                       : "bg-white")
                   }
                 ></div>
