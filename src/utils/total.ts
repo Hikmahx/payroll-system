@@ -23,4 +23,3 @@ export const formattedNumber = (number: number): string => {
     maximumFractionDigits: 2,
   });
 };
-

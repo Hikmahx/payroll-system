@@ -7,7 +7,11 @@ import Loading from "../shared/Loading";
 import { getEmployees } from "../../redux/reducers/employeesSlice";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
-import { deductionTotal, earningTotal, formattedNumber } from "../../utils/total";
+import {
+  deductionTotal,
+  earningTotal,
+  formattedNumber,
+} from "../../utils/total";
 
 const EmployeesTable = () => {
   const dispatch: ThunkDispatch<RootState, null, AnyAction> = useDispatch();
@@ -15,8 +19,6 @@ const EmployeesTable = () => {
   const { loading, error, errMsg, employees } = useSelector(
     (state: RootState) => state.employees
   );
-
-  // const { pickedDate, submitted } = useSelector((state) => state.calendar);
 
   useEffect(() => {
     dispatch(getEmployees());
@@ -38,7 +40,6 @@ const EmployeesTable = () => {
                 <div className="bg-white w-full overflow-x-auto rounded-md p-4">
                   <table
                     className="table-auto text-left w-full overflow-x-scroll scroll-smooth text-xs"
-                    // tabIndex="0"
                   >
                     <thead className="text-bright-navy whitespace-nowrap font-light ">
                       <tr className="font-bold border-b border-gray">

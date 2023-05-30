@@ -1,12 +1,7 @@
 import React from "react";
 import { deductionTotal, formattedNumber } from "../../utils/total";
-// import { useSelector } from "react-redux";
-// import { RootState } from "../../redux/store";
 
 const Deductions = ({ employee }: any) => {
-  // const { loading, error, errMsg, employee } = useSelector(
-  //   (state: RootState) => state.employees
-  // );
   return (
     <div className="flex-1 p-4 border border-zinc-200 rounded-md flex flex-col justify-between">
       <div className="">

@@ -99,10 +99,6 @@ const Header = () => {
                 <span className="text-2xl">Payroll System</span>
               </NavLink>
             </div>
-
-            {/* <div className="bg-pink-400 h-40 w-">
-              <div className=" px-4 max-w-xl lg:max-w-7xl mx-auto"></div>
-            </div> */}
           </div>
         </div>
 

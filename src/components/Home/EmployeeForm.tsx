@@ -16,7 +16,6 @@ const EmployeeForm = ({ employee }: any) => {
   let params = useParams();
 
   type FormValues = {
-    // id: number,
     name: string;
     email: string;
     position: string;
@@ -94,7 +93,6 @@ const EmployeeForm = ({ employee }: any) => {
                 </label>
                 <input
                   id="name"
-                  // name="name"
                   type="text"
                   className="h-10 p-3 w-full border border-gray placeholder-gray focus:outline-none focus:border-cyan-500 rounded-md"
                   placeholder="Full Name"
@@ -110,7 +108,6 @@ const EmployeeForm = ({ employee }: any) => {
                 </label>
                 <input
                   id="email"
-                  // name="email"
                   type="email"
                   className="h-10 p-3 w-full border border-gray placeholder-gray focus:outline-none focus:border-cyan-500 rounded-md"
                   placeholder="Email"
@@ -128,13 +125,11 @@ const EmployeeForm = ({ employee }: any) => {
               </label>
               <select
                 id="position"
-                // name="position"
                 className="form-select form-select-lg !shadow-none bg-clip-padding bg-no-repeat appearance-none px-3 py-2 w-full h-10 border border-gray rounded-md transition ease-in-out text-dark-gray bg-white cursor-pointer focus:text-dark-gray focus:border-cyan-500 focus:outline-none"
                 aria-label="position"
                 {...register("position")}
                 defaultValue={update ? employee?.position : ""}
                 required
-                // onChange={(e) => dispatch(setposition(e.target.value))}
               >
                 <option value="" hidden>
                   Select a postition
@@ -192,7 +187,6 @@ const EmployeeForm = ({ employee }: any) => {
                 </label>
                 <input
                   id="basic"
-                  // name="basic"
                   type="number"
                   className="h-10 p-3 w-full border border-gray placeholder-gray focus:outline-none focus:border-cyan-500 rounded-md"
                   placeholder="Basic Earnings"
@@ -209,7 +203,6 @@ const EmployeeForm = ({ employee }: any) => {
                 </label>
                 <input
                   id="transport"
-                  // name="transport"
                   type="number"
                   className="h-10 p-3 w-full border border-gray placeholder-gray focus:outline-none focus:border-cyan-500 rounded-md"
                   placeholder="Transport"
@@ -243,7 +236,6 @@ const EmployeeForm = ({ employee }: any) => {
                 </label>
                 <input
                   id="housing"
-                  // name="housing"
                   type="number"
                   className="h-10 p-3 w-full border border-gray placeholder-gray focus:outline-none focus:border-cyan-500 rounded-md"
                   placeholder="Housing"
@@ -269,7 +261,6 @@ const EmployeeForm = ({ employee }: any) => {
                 </label>
                 <input
                   id="pension"
-                  // name="pension"
                   type="number"
                   className="h-10 p-3 w-full border border-gray placeholder-gray focus:outline-none focus:border-cyan-500 rounded-md"
                   placeholder="Pension"
@@ -286,7 +277,6 @@ const EmployeeForm = ({ employee }: any) => {
                 </label>
                 <input
                   id="tax"
-                  // name="tax"
                   type="number"
                   className="h-10 p-3 w-full border border-gray placeholder-gray focus:outline-none focus:border-cyan-500 rounded-md"
                   placeholder="Tax"

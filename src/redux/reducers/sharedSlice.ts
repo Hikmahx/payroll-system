@@ -14,7 +14,7 @@ const sharedSlice = createSlice({
   reducers: {
     setMenuDisplay: (state, { payload }) => {
       state.menuDisplay = payload;
-    }
+    },
   },
 });
 

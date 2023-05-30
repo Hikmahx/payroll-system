@@ -1,7 +1,7 @@
 import { BrowserRouter } from "react-router-dom";
 import MyRoutes from "./routes/MyRoutes";
 
-const App = ()=> {
+const App = () => {
   return (
     <BrowserRouter>
       <div className="">
@@ -9,6 +9,6 @@ const App = ()=> {
       </div>
     </BrowserRouter>
   );
-}
+};
 
 export default App;

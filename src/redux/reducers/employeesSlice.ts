@@ -8,7 +8,6 @@ interface EmployeesState {
   error: boolean;
   loading: boolean;
   errMsg: string | undefined;
-  // deduction: number;
   update: boolean;
 }
 
@@ -121,15 +120,12 @@ const initialState: EmployeesState = {
   loading: false,
   errMsg: "" as string | undefined,
   update: false,
-  // deduction:0
 };
 
 const EmployeesSlice = createSlice({
   name: "employees",
   initialState,
   reducers: {
-    // deductionTotal: (state, action) => {
-    // },
     updateEmployeeData: (state, { payload }) => {
       state.update = payload;
     },

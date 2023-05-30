@@ -1,4 +1,3 @@
-// import React, { useEffect } from "react";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -6,14 +5,10 @@ import EmployeeForm from "../components/Home/EmployeeForm";
 import Success from "../components/Home/Success";
 import { updateEmployeeData } from "../redux/reducers/employeesSlice";
 import { AppDispatch, RootState } from "../redux/store";
-// import { useDispatch } from "react-redux";
-// import { AppDispatch } from "../redux/store";
 
 const DashBoard = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { employees } = useSelector(
-    (state: RootState) => state.employees
-  );
+  const { employees } = useSelector((state: RootState) => state.employees);
   const navigate = useNavigate();
   const isFirstRender = useRef(true);
   const [newEmployee, setNewEmployee] = useState(false);
@@ -27,7 +22,7 @@ const DashBoard = () => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
     } else {
-      // This effect will be triggered only when the employees  increases
+      // THIS EFFECT WILL BE TRIGGERED ONLY WHEN THE EMPLOYEES STATE INCREASES
       setNewEmployee(true);
 
       const timeout = setTimeout(() => {
@@ -42,8 +37,6 @@ const DashBoard = () => {
   }, [employees]);
 
   document.title = "Payroll System";
-
-  // const dispatch = useDispatch<AppDispatch>();
 
   return (
     <>

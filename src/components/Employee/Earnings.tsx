@@ -1,5 +1,5 @@
 import React from "react";
-import { earningTotal, formattedNumber, overallTotal } from "../../utils/total";
+import { earningTotal, formattedNumber } from "../../utils/total";
 
 const Deductions = ({ employee }: any) => {
   return (
@@ -35,10 +35,7 @@ const Deductions = ({ employee }: any) => {
       <div className="">
         <h2 className="text-lg">
           <span className="font-bold">Total:</span>{" "}
-          <span className="">
-            {" "}
-            ₦ {formattedNumber(earningTotal(employee))}
-          </span>
+          <span className=""> ₦ {formattedNumber(earningTotal(employee))}</span>
         </h2>
       </div>
     </div>

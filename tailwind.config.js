@@ -13,8 +13,6 @@ module.exports = {
         'very-light-gray': "#F2F2F2",
         'white': '#ffffff',
         'transparent': 'transparent',
-        'olive': '#878600',
-        'saturated-yellow': '#F7AA23'
       },
       screens: {
         '2xl': '1336px'
