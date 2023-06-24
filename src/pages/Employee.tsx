@@ -12,7 +12,7 @@ import {
 import { RootState } from "../redux/store";
 import { useNavigate, useParams } from "react-router-dom";
 import { formattedNumber, overallTotal } from "../utils/total";
-import EmployeeForm from "../components/Home/EmployeeForm";
+import EmployeeForm from "../components/Home/EmployeeForm/EmployeeForm";
 import { useReactToPrint } from "react-to-print";
 
 const Employee = () => {

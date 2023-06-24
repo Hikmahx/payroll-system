@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { AppDispatch, RootState } from "../../redux/store";
+import { AppDispatch, RootState } from "../../../redux/store";
 import {
   addEmployee,
   updateEmployee,
   updateEmployeeData,
-} from "../../redux/reducers/employeesSlice";
+} from "../../../redux/reducers/employeesSlice";
 import { useParams } from "react-router-dom";
 
 const EmployeeForm = ({ employee }: any) => {
@@ -146,7 +146,7 @@ const EmployeeForm = ({ employee }: any) => {
 
             {/* CADRE LEVEL */}
             <div className="px-4 mb-8">
-              <label htmlFor="position" className="block mb-2">
+              <label htmlFor="cadreLevel" className="block mb-2">
                 Cadre Level
               </label>
               <select

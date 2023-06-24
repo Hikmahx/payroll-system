@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import EmployeeForm from "../components/Home/EmployeeForm";
+import EmployeeForm from "../components/Home/EmployeeForm/EmployeeForm";
 import Success from "../components/Home/Success";
 import { updateEmployeeData } from "../redux/reducers/employeesSlice";
 import { AppDispatch, RootState } from "../redux/store";
