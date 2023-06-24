@@ -39,6 +39,7 @@ const EmployeesTable = () => {
                 <h2 className="sr-only">data table</h2>
                 <div className="bg-white w-full overflow-x-auto rounded-md p-4">
                   <table
+                  data-testid="employees-table"
                     className="table-auto text-left w-full overflow-x-scroll scroll-smooth text-xs"
                   >
                     <thead className="text-bright-navy whitespace-nowrap font-light ">
@@ -103,7 +104,7 @@ const EmployeesTable = () => {
         </>
       ) : (
         <>
-          <p className=" mt-20 text-center text-very-dark-blue min-h-[85vh]">
+          <p data-testid="error-message"  className=" mt-20 text-center text-very-dark-blue min-h-[85vh]">
             {errMsg}.
           </p>
         </>
