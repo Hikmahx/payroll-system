@@ -64,8 +64,14 @@ describe("Testing Employee Form", () => {
 
     userEvent.type(screen.getByPlaceholderText(/Full Name/i), formData.name);
     userEvent.type(screen.getByPlaceholderText(/Email/i), formData.email);
-    userEvent.selectOptions(screen.getByLabelText("position"), formData.position);
-    userEvent.selectOptions(screen.getByLabelText("cadreLevel"), formData.position);
+    userEvent.selectOptions(
+      screen.getByLabelText("position"),
+      formData.position
+    );
+    userEvent.selectOptions(
+      screen.getByLabelText("cadreLevel"),
+      formData.cadreLevel
+    );
     userEvent.type(
       screen.getByPlaceholderText(/Basic Earnings/i),
       formData.earnings.basic.toString()
@@ -92,5 +98,43 @@ describe("Testing Employee Form", () => {
     );
 
     userEvent.click(screen.getByText("Submit"));
+  });
+
+  test("renders 'Update' when 'update' state is true", () => {
+    store = mockStore({
+      employees: {
+        update: true,
+      },
+    });
+
+    render(
+      <BrowserRouter>
+        <Provider store={store}>
+          <EmployeeForm />
+        </Provider>
+      </BrowserRouter>
+    );
+
+    const updateText = screen.getByText(/Update Employee/i);
+    expect(updateText).toBeInTheDocument();
+  });
+
+  test("renders 'Add' when 'update' state is false", () => {
+    store = mockStore({
+      employees: {
+        update: false,
+      },
+    });
+
+    render(
+      <BrowserRouter>
+        <Provider store={store}>
+          <EmployeeForm />
+        </Provider>
+      </BrowserRouter>
+    );
+
+    const addText = screen.getByText(/Add Employee/i);
+    expect(addText).toBeInTheDocument();
   });
 });
