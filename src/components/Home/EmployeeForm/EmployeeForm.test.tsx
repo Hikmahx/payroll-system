@@ -1,11 +1,22 @@
 import React from "react";
-import { act, render, screen } from "@testing-library/react";
-import { Provider } from "react-redux";
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
+import { Provider, useDispatch } from "react-redux";
 import configureStore, { MockStoreEnhanced } from "redux-mock-store";
 import EmployeeForm from "./EmployeeForm";
 import thunk from "redux-thunk";
 import { BrowserRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
+import { useParams } from "react-router-dom";
+import {
+  updateEmployee,
+  updateEmployeeData,
+} from "../../../redux/reducers/employeesSlice";
 
 const mockStore = configureStore([thunk]);
 
@@ -34,7 +45,7 @@ describe("Testing Employee Form", () => {
 
   test("Testing form functionality", async () => {
     const formData = {
-      id: 1685328248504,
+      id: Date.now(),
       name: "John Doe",
       email: "johndoe@gmail.com",
       position: "accountant",
@@ -165,11 +176,13 @@ describe("Testing Employee Form", () => {
     render(
       <BrowserRouter>
         <Provider store={store}>
-          <EmployeeForm employee={employee} />
+          <EmployeeForm employee={employee} id={employee.id} store={store} />
         </Provider>
       </BrowserRouter>
     );
-    const positionSelect = screen.getByLabelText("position") as HTMLSelectElement;
+    const positionSelect = screen.getByLabelText(
+      "position"
+    ) as HTMLSelectElement;
 
     expect(positionSelect).toBeInTheDocument();
     expect(positionSelect.value).toBe(employee.position);
@@ -177,5 +190,114 @@ describe("Testing Employee Form", () => {
     userEvent.selectOptions(positionSelect, "manager");
 
     expect(positionSelect.value).toBe("manager");
+  });
+
+
+  test("update employee", async () => {
+    const employee = {
+      id: 123,
+      name: "John Doe",
+      email: "johndoe@example.com",
+      position: "developer",
+      cadreLevel: "Mid Level",
+      earnings: {
+        basic: 1000,
+        transport: 200,
+        overtime: 50,
+        housing: 300,
+      },
+      deductions: {
+        tax: 100,
+        pension: 50,
+      },
+    };
+
+    let updatedEmployee = {
+      id: 123,
+      name: "John Doe 1",
+      email: "johndoe@example.com",
+      position: "developer",
+      cadreLevel: "Junior Level",
+      earnings: {
+        basic: 2000,
+        transport: 200,
+        overtime: 50,
+        housing: 300,
+      },
+      deductions: {
+        tax: 100,
+        pension: 50,
+      },
+    };
+
+    let store = mockStore({
+      employees: {
+        employees: [],
+        employee: employee,
+        loading: false,
+        error: false,
+        update: true,
+      },
+    });
+
+    store.clearActions();
+
+    render(
+      <BrowserRouter>
+        <Provider store={store}>
+          <EmployeeForm employee={employee} />
+        </Provider>
+      </BrowserRouter>
+    );
+
+    await wait();
+
+    userEvent.clear(screen.getByPlaceholderText(/Full Name/i));
+    userEvent.type(
+      screen.getByPlaceholderText(/Full Name/i),
+      updatedEmployee.name
+    );
+    // OR
+    // fireEvent.change(screen.getByLabelText(/Full Name/i), {target: {value: updatedEmployee.name}})
+
+    userEvent.selectOptions(
+      screen.getByLabelText("cadreLevel"),
+      updatedEmployee.cadreLevel
+    );
+    userEvent.clear(screen.getByPlaceholderText(/Basic Earnings/i));
+    userEvent.type(
+      screen.getByPlaceholderText(/Basic Earnings/i),
+      updatedEmployee.earnings.basic.toString()
+    );
+
+    userEvent.click(screen.getByText("Submit"));
+
+    const mockDispatch = {
+      type: "employees/updateEmployee/fulfilled",
+      payload: updatedEmployee,
+    };
+
+    await store.dispatch(mockDispatch);
+
+    store = mockStore({
+      employees: {
+        employees: [],
+        employee: updatedEmployee,
+        loading: false,
+        error: false,
+        update: false,
+      },
+    });
+
+    const state = store.getState() as any;
+    expect(state).toEqual({
+      employees: {
+        employees: [],
+        employee: updatedEmployee,
+        loading: false,
+        error: false,
+        update: false,
+      },
+    });
   });
 });
