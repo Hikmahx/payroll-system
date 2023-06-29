@@ -60,7 +60,7 @@ const EmployeeForm = ({ employee }: any) => {
         })
       );
       dispatch(updateEmployeeData(false));
-      alert("Employee data updated successfully");
+      // alert("Employee data updated successfully");
     }
     reset();
   };
@@ -71,7 +71,7 @@ const EmployeeForm = ({ employee }: any) => {
         {update ? "Update" : "Add"} Employee
       </h2>
       {update && (
-        <button onClick={() => dispatch(updateEmployeeData(false))}>
+        <button data-testid="cancel-update" onClick={() => dispatch(updateEmployeeData(false))}>
           <span className="sr-only">Cancel Update</span>
           <i className="fa-sharp fa-solid fa-circle-xmark absolute top-4 right-0 hover:text-red-500"></i>
         </button>

@@ -130,6 +130,27 @@ describe("Testing Employee Form", () => {
     expect(updateText).toBeInTheDocument();
   });
 
+  test("Cancel Update", () => {
+    store = mockStore({
+      employees: {
+        update: true,
+      },
+    });
+
+    render(
+      <BrowserRouter>
+        <Provider store={store}>
+          <EmployeeForm />
+        </Provider>
+      </BrowserRouter>
+    );
+
+    const cancelText = screen.getByText(/Cancel Update/i);
+    expect(cancelText).toBeInTheDocument();
+
+    userEvent.click(screen.getByTestId("cancel-update"));
+  });
+
   test("renders 'Add' when 'update' state is false", () => {
     store = mockStore({
       employees: {
