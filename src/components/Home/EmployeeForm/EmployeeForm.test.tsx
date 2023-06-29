@@ -250,20 +250,14 @@ describe("Testing Employee Form", () => {
       </BrowserRouter>
     );
 
-    await wait();
-
     userEvent.clear(screen.getByPlaceholderText(/Full Name/i));
-    userEvent.type(
-      screen.getByPlaceholderText(/Full Name/i),
-      updatedEmployee.name
-    );
-    // OR
-    // fireEvent.change(screen.getByLabelText(/Full Name/i), {target: {value: updatedEmployee.name}})
+    userEvent.type(screen.getByPlaceholderText(/Full Name/i), updatedEmployee.name);
 
     userEvent.selectOptions(
       screen.getByLabelText("cadreLevel"),
       updatedEmployee.cadreLevel
     );
+  
     userEvent.clear(screen.getByPlaceholderText(/Basic Earnings/i));
     userEvent.type(
       screen.getByPlaceholderText(/Basic Earnings/i),
