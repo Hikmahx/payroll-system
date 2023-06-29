@@ -192,7 +192,6 @@ describe("Testing Employee Form", () => {
     expect(positionSelect.value).toBe("manager");
   });
 
-
   test("update employee", async () => {
     const employee = {
       id: 123,
@@ -230,7 +229,7 @@ describe("Testing Employee Form", () => {
       },
     };
 
-    let store = mockStore({
+    store = mockStore({
       employees: {
         employees: [],
         employee: employee,
@@ -239,8 +238,6 @@ describe("Testing Employee Form", () => {
         update: true,
       },
     });
-
-    store.clearActions();
 
     render(
       <BrowserRouter>
@@ -251,13 +248,16 @@ describe("Testing Employee Form", () => {
     );
 
     userEvent.clear(screen.getByPlaceholderText(/Full Name/i));
-    userEvent.type(screen.getByPlaceholderText(/Full Name/i), updatedEmployee.name);
+    userEvent.type(
+      screen.getByPlaceholderText(/Full Name/i),
+      updatedEmployee.name
+    );
 
     userEvent.selectOptions(
       screen.getByLabelText("cadreLevel"),
       updatedEmployee.cadreLevel
     );
-  
+
     userEvent.clear(screen.getByPlaceholderText(/Basic Earnings/i));
     userEvent.type(
       screen.getByPlaceholderText(/Basic Earnings/i),
@@ -271,7 +271,9 @@ describe("Testing Employee Form", () => {
       payload: updatedEmployee,
     };
 
-    await store.dispatch(mockDispatch);
+    await act(async () => {
+      store.dispatch(mockDispatch);
+    });
 
     store = mockStore({
       employees: {
