@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Employee } from "./types";
 import axios, { AxiosError } from "axios";
 
-interface EmployeesState {
+export interface EmployeesState {
   employees: Employee[] | [];
   employee: Employee[] | [];
   error: boolean;
