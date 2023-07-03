@@ -3,17 +3,18 @@ import { configureStore } from "@reduxjs/toolkit";
 // import { AppDispatch } from "../store";
 import employeesReducer, {
   addEmployee,
-  EmployeesState,
+  // EmployeesState,
   getEmployees,
   // getEmployees,
   // updateEmployee,
   // updateEmployeeData,
 } from "./employeesSlice";
 import reducer from "./employeesSlice";
-import { Employee } from "./types";
+// import { Employee } from "./types";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
-import { render } from "../../utils/test-utils";
+// import { render } from "../../utils/test-utils";
+import axios from "axios";
 
 // We use msw to intercept the network request during the test,
 // and return the response 'John Smith' after 150ms
@@ -149,7 +150,7 @@ describe("employeesSlice", () => {
       error: { message: "Error message" }, // Provide an error object with the message property
     };
     const state = reducer(initialState, rejectedAction);
-    console.log(state);
+    // console.log(state);
     expect(state).toEqual({
       employees: [],
       employee: [],
@@ -158,5 +159,75 @@ describe("employeesSlice", () => {
       errMsg: "Error message",
       update: false,
     });
+  });
+
+
+  test("render addEmployee from slice", async () => {
+    const formData = {
+      id: Date.now(),
+      name: "John Doe",
+      email: "johndoe@gmail.com",
+      position: "accountant",
+      cadreLevel: "Consultant",
+      isAdmin: false,
+      earnings: {
+        basic: 5000,
+        transport: 1000,
+        overtime: 370,
+        housing: 700,
+      },
+      deductions: {
+        tax: 500,
+        pension: 200,
+      },
+    };
+    jest.spyOn(addEmployee, "pending");
+    // jest.spyOn(addEmployee, 'fulfilled');
+    const store = configureStore({ reducer: employeesReducer });
+    await store.dispatch(addEmployee(formData));
+
+    expect(await store.getState().employees.length).toBeGreaterThan(0);
+    jest.spyOn(addEmployee, "pending").mockRestore();  
+  });
+
+  test("render addEmployee from slice with error handling", async () => {
+    const formData = {
+      id: Date.now(),
+      name: "John Doe",
+      email: "johndoe@gmail.com",
+      position: "accountant",
+      cadreLevel: "Consultant",
+      isAdmin: false,
+      earnings: {
+        basic: 5000,
+        transport: 1000,
+        overtime: 370,
+        housing: 700,
+      },
+      deductions: {
+        tax: 500,
+        pension: 200,
+      },
+    };
+
+    // Mock the axios.post method to simulate an error response
+    jest
+      .spyOn(axios, "post")
+      .mockRejectedValue(new Error("Some error message"));
+    jest.spyOn(addEmployee, "pending");
+    // console.log(jest.spyOn(addEmployee, "pending"));
+    // jest.spyOn(addEmployee, "rejected");
+    const store = configureStore({ reducer: employeesReducer });
+
+    try {
+      await store.dispatch(addEmployee(formData));
+
+      expect(await store.getState().employees.length).toBe(0);
+      jest.spyOn(addEmployee, "pending").mockRestore();
+    } catch (error: any) {
+      if (!error.response) {
+        throw error;
+      }
+    }
   });
 });
