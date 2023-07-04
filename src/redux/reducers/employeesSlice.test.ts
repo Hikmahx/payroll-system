@@ -3,6 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 // import { AppDispatch } from "../store";
 import employeesReducer, {
   addEmployee,
+  deleteEmployee,
   // EmployeesState,
   getEmployees,
   getSingleEmployee,
@@ -299,6 +300,33 @@ describe("employeesSlice", () => {
 
       expect(await store.getState().employees.length).toBe(0);
       jest.spyOn(updateEmployee, "pending").mockRestore();
+    } catch (error: any) {
+      if (!error.response) {
+        throw error;
+      }
+    }
+  });
+
+
+  test("render deleteEmployee from slice", async () => {
+    jest.spyOn(deleteEmployee, "pending");
+    jest.spyOn(deleteEmployee, "fulfilled");
+    const store = configureStore({ reducer: employeesReducer });
+    await store.dispatch(deleteEmployee("1685328248504"));
+    expect(await store.getState().employee.length).toBe(0);
+    jest.spyOn(deleteEmployee, "pending").mockRestore();
+  });
+
+  test("render deleteEmployee from slice with error handling", async () => {
+    jest.spyOn(axios, "delete").mockRejectedValue(new Error("Some error message"));
+    jest.spyOn(deleteEmployee, "pending");
+    const store = configureStore({ reducer: employeesReducer });
+
+    try {
+      await store.dispatch(deleteEmployee("1685328248504"));
+
+      expect(await store.getState().employees.length).toBe(0);
+      jest.spyOn(deleteEmployee, "pending").mockRestore();
     } catch (error: any) {
       if (!error.response) {
         throw error;
