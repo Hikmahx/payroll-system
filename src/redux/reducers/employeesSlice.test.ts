@@ -6,6 +6,7 @@ import employeesReducer, {
   // EmployeesState,
   getEmployees,
   getSingleEmployee,
+  updateEmployee,
   // getEmployees,
   // updateEmployee,
   // updateEmployeeData,
@@ -251,6 +252,53 @@ describe("employeesSlice", () => {
       expect(await store.getState().employees.length).toBe(0);
       // expect(await store.getState().errMsg.toBe("Some error message"))
       jest.spyOn(getSingleEmployee, "pending").mockRestore();
+    } catch (error: any) {
+      if (!error.response) {
+        throw error;
+      }
+    }
+  });
+
+  test("render updateEmployee from slice", async () => {
+    const formData = {
+      id: 1685328248504,
+      name: "John Doe",
+      email: "johndoe@gmail.com",
+      position: "developer",
+      cadreLevel: "Director",
+      isAdmin: false,
+      earnings: {
+        basic: 5450,
+        transport: 1000,
+        overtime: 370,
+        housing: 700,
+      },
+      deductions: {
+        tax: 500,
+        pension: 200,
+      },
+    };
+
+    jest.spyOn(updateEmployee, "pending");
+    jest.spyOn(updateEmployee, "fulfilled");
+    const store = configureStore({ reducer: employeesReducer });
+    await store.dispatch(
+      updateEmployee({ dataInfo: formData, id: "1685328248504" })
+    );
+    expect(await store.getState().employee.length).toBeGreaterThan(0);
+    jest.spyOn(updateEmployee, "pending").mockRestore();
+  });
+
+  test("render updateEmployee from slice with error handling", async () => {
+    jest.spyOn(axios, "put").mockRejectedValue(new Error("Some error message"));
+    jest.spyOn(updateEmployee, "pending");
+    const store = configureStore({ reducer: employeesReducer });
+
+    try {
+      await store.dispatch(updateEmployee({ id: "1685328248504" }));
+
+      expect(await store.getState().employees.length).toBe(0);
+      jest.spyOn(updateEmployee, "pending").mockRestore();
     } catch (error: any) {
       if (!error.response) {
         throw error;
