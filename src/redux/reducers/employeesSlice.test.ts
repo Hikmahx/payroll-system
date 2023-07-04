@@ -4,13 +4,10 @@ import { configureStore } from "@reduxjs/toolkit";
 import employeesReducer, {
   addEmployee,
   deleteEmployee,
-  // EmployeesState,
   getEmployees,
   getSingleEmployee,
   updateEmployee,
-  // getEmployees,
-  // updateEmployee,
-  // updateEmployeeData,
+  updateEmployeeData,
 } from "./employeesSlice";
 import reducer from "./employeesSlice";
 // import { Employee } from "./types";
@@ -18,6 +15,7 @@ import { rest } from "msw";
 import { setupServer } from "msw/node";
 // import { render } from "../../utils/test-utils";
 import axios from "axios";
+import employeesSlice from "./employeesSlice";
 
 // We use msw to intercept the network request during the test,
 // and return the response 'John Smith' after 150ms
@@ -307,7 +305,6 @@ describe("employeesSlice", () => {
     }
   });
 
-
   test("render deleteEmployee from slice", async () => {
     jest.spyOn(deleteEmployee, "pending");
     jest.spyOn(deleteEmployee, "fulfilled");
@@ -318,7 +315,9 @@ describe("employeesSlice", () => {
   });
 
   test("render deleteEmployee from slice with error handling", async () => {
-    jest.spyOn(axios, "delete").mockRejectedValue(new Error("Some error message"));
+    jest
+      .spyOn(axios, "delete")
+      .mockRejectedValue(new Error("Some error message"));
     jest.spyOn(deleteEmployee, "pending");
     const store = configureStore({ reducer: employeesReducer });
 
@@ -332,5 +331,11 @@ describe("employeesSlice", () => {
         throw error;
       }
     }
+  });
+
+  test("render updateEmployeeData from slice", () => {
+    const store = configureStore({ reducer: employeesReducer });
+    store.dispatch(updateEmployeeData(true));
+    expect(store.getState().update).toBeTruthy();
   });
 });
