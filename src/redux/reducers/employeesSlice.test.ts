@@ -5,6 +5,7 @@ import employeesReducer, {
   addEmployee,
   // EmployeesState,
   getEmployees,
+  getSingleEmployee,
   // getEmployees,
   // updateEmployee,
   // updateEmployeeData,
@@ -96,7 +97,7 @@ describe("employeesSlice", () => {
 
     // expect(store.getState().employees).toEqual([formData]);
     // console.log(store.getState().employees);
-    jest.spyOn(getEmployees, "pending").mockRestore();  
+    jest.spyOn(getEmployees, "pending").mockRestore();
   });
 
   test("sets state when getEmployees is pending", () => {
@@ -161,7 +162,6 @@ describe("employeesSlice", () => {
     });
   });
 
-
   test("render addEmployee from slice", async () => {
     const formData = {
       id: Date.now(),
@@ -187,7 +187,7 @@ describe("employeesSlice", () => {
     await store.dispatch(addEmployee(formData));
 
     expect(await store.getState().employees.length).toBeGreaterThan(0);
-    jest.spyOn(addEmployee, "pending").mockRestore();  
+    jest.spyOn(addEmployee, "pending").mockRestore();
   });
 
   test("render addEmployee from slice with error handling", async () => {
@@ -224,6 +224,33 @@ describe("employeesSlice", () => {
 
       expect(await store.getState().employees.length).toBe(0);
       jest.spyOn(addEmployee, "pending").mockRestore();
+    } catch (error: any) {
+      if (!error.response) {
+        throw error;
+      }
+    }
+  });
+
+  test("render getSingleEmployee from slice", async () => {
+    jest.spyOn(getSingleEmployee, "pending");
+    jest.spyOn(getSingleEmployee, "fulfilled");
+    const store = configureStore({ reducer: employeesReducer });
+    await store.dispatch(getSingleEmployee("1685328248504"));
+    expect(await store.getState().employee.length).toBeGreaterThan(0);
+    jest.spyOn(getSingleEmployee, "pending").mockRestore();
+  });
+
+  test("render getSingleEmployee from slice with error handling", async () => {
+    jest.spyOn(axios, "get").mockRejectedValue(new Error("Some error message"));
+    jest.spyOn(getSingleEmployee, "pending");
+    const store = configureStore({ reducer: employeesReducer });
+
+    try {
+      await store.dispatch(getSingleEmployee("1685328248504"));
+
+      expect(await store.getState().employees.length).toBe(0);
+      // expect(await store.getState().errMsg.toBe("Some error message"))
+      jest.spyOn(getSingleEmployee, "pending").mockRestore();
     } catch (error: any) {
       if (!error.response) {
         throw error;
